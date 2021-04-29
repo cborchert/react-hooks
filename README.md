@@ -1,6 +1,6 @@
 # React Custom Hooks
 
-The useAxios hook for React automatically handles the request cancellation on unmount, triggers the call after mount or manually, etc.
+The useAxios hook for React that automatically handles the request cancellation on unmount, triggers the call after mount or manually, etc.
 
 # How to use useAxios custom hook
  ```javascript 
