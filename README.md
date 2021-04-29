@@ -22,5 +22,5 @@ The useAxios hook for React automatically handles the request cancellation on un
  * `{Object}` _response_: an object that contains the data response if the axios call is successful, by default 'undefined'.
  * `{Object}`_error_: an object that contains the error object if the axios call has failed, by default 'undefined'.
 
-# If you use Enzyme to test your React components
-You can use a tiny hook mounter _mountHook_ based on Enzyme mount. See **enzymeHelpers.js** for more details.
+# How to test your custom Hooks
+If you use Enzyme to test your React components, you can use a tiny hook mounter _mountHook_ based on Enzyme mount to test your custom hooks. See **enzymeHelpers.js** for more details.
