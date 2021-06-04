@@ -12,7 +12,7 @@
  * @param others all classic axios config.
  *
  * @return {Function} request is a function that will trigger axios call manually with extended axios config (optional) as parameter.
- * @return {boolean} isLoading is a flag set to true when the axios call is in process, by default 'false'.
+ * @return {boolean} isLoading is a flag set to true when the axios call is in process, by default 'undefined' to avoid extra renders.
  * @return {Object} response contains the data response if the axios call is successful, by default 'undefined'.
  * @return {Object} error contains the error object if the axios call has failed, by default 'undefined'.
  */
@@ -47,7 +47,7 @@ export const AXIOS_HOOK_ACTIONS = {
  * @type {InitialStateTypes}
  */
 const initialState: InitialStateTypes = {
-  isLoading: false,
+  isLoading: undefined,
   response: undefined,
   error: undefined,
 };
