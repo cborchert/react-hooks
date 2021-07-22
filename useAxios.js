@@ -17,8 +17,8 @@
  * @return {Object} error contains the error object if the axios call has failed, by default 'undefined'.
  */
 
-import { useEffect, useRef, useReducer, useCallback } from 'react';
-import axios from 'axios';
+import { useEffect, useRef, useReducer, useCallback } from "react";
+import axios from "axios";
 
 type UseAxiosConfigTypes = {
   afterMount?: boolean,
@@ -37,8 +37,8 @@ type InitialStateTypes = {
  * @type {Object}
  */
 export const AXIOS_HOOK_ACTIONS = {
-  START: 'AXIOS_HOOK_ACTIONS_START',
-  END: 'AXIOS_HOOK_ACTIONS_END',
+  START: "AXIOS_HOOK_ACTIONS_START",
+  END: "AXIOS_HOOK_ACTIONS_END",
 };
 
 /**
@@ -46,7 +46,7 @@ export const AXIOS_HOOK_ACTIONS = {
  *
  * @type {InitialStateTypes}
  */
-const initialState: InitialStateTypes = {
+const initialState: InitialStateTypes = #{
   isLoading: undefined,
   response: undefined,
   error: undefined,
@@ -86,7 +86,17 @@ function requestReducer(state: Object = initialState, action: Object) {
  *
  * @returns {Array} [{ isLoading, response, error }, request]
  */
-export default function useAxios({ afterMount = false, ...axiosConfig }: UseAxiosConfigTypes = {}) {
+export default function useAxios<ResponseType, ErrorType>({
+  afterMount = false,
+  ...axiosConfig
+}: UseAxiosConfigTypes = {}): [
+  {|
+    isLoading?: boolean,
+    response: ResponseType,
+    error: ErrorType,
+  |},
+  (any) => any
+] {
   const cancelSourceRef = useRef();
   const unMountedRef = useRef(false);
   const configRef = useRef(axiosConfig); // because 'axiosConfig' is primitive, at each render of the parent using this hook, we'll get a new reference.
@@ -129,16 +139,19 @@ export default function useAxios({ afterMount = false, ...axiosConfig }: UseAxio
         cancelSourceRef.current.cancel();
       }
     },
-    [],
+    []
   );
 
   return [
     state,
     useCallback(
       (newConfig: Object) =>
-        request({ ...configRef.current, ...newConfig }, cancelSourceRef.current),
+        request(
+          { ...configRef.current, ...newConfig },
+          cancelSourceRef.current
+        ),
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [],
+      []
     ),
   ];
 }
